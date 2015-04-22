@@ -7,13 +7,15 @@
 //
 
 #import "ViewController.h"
+#import "PetCollectionViewCell.h"
+//#import "CollectionViewLayout.h"
 
 static NSString *CellIdentifier = @"CellIdentifier";
 
-@interface ViewController () <UITableViewDataSource>
+@interface ViewController () <UICollectionViewDataSource>
 
-@property (strong, nonatomic) UITableView *tableView;
-@property (copy, nonatomic) NSArray *dataSource;
+@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -23,7 +25,8 @@ static NSString *CellIdentifier = @"CellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataSource = [NSArray array];
-    [self setupTableView];
+    [self setupCollectionView];
+    
     //[self makePetGetRandomRequest:@"&animal=dog"];
     [self makePetFindRequest:@"11211" options:nil];
 }
@@ -32,32 +35,78 @@ static NSString *CellIdentifier = @"CellIdentifier";
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.tableView.frame = self.view.bounds;
+    self.collectionView.frame = self.view.bounds;
 }
+
+
 
 #pragma mark - datasource
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.textLabel.text = self.dataSource[indexPath.row][0];
-    
-    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: self.dataSource[indexPath.row][1]]];
-    cell.imageView.image = [UIImage imageWithData:imageData];
-    return cell;
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataSource.count;
 }
 
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    PetCollectionViewCell *cell = (PetCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    //cell.textLabel.text = self.dataSource[indexPath.row][0];
+    cell.label.text = @"test text";
+    //self.dataSource[indexPath.row][0];
+    
+    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: self.dataSource[indexPath.row][1]]];
+    //cell.imageView.image = [UIImage imageWithData:imageData];
+    
+    [cell.imageView setImage:[UIImage imageWithData:imageData]];
+    //UIImage *image = [UIImage imageWithContentsOfFile:filename];
+    //cell.imageView = setContentMode:UIViewContentModeScaleAspectFit];
+    
+    return cell;
+}
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    cell.textLabel.text = self.dataSource[indexPath.row][0];
+    
+//    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: self.dataSource[indexPath.row][1]]];
+//    cell.imageView.image = [UIImage imageWithData:imageData];
+//    return cell;
+//}
+
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return self.dataSource.count;
+//}
+
 #pragma mark - helper
-- (void)setupTableView
+- (void)setupCollectionView
 {
-    self.tableView = [UITableView new];
-    self.tableView.dataSource = self;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    [self.view addSubview:self.tableView];
+   
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    [flowLayout setMinimumInteritemSpacing:0.0f];
+    [flowLayout setMinimumLineSpacing:0.0f];
+    
+    
+    // self.collectionView = [UICollectionView new];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds  collectionViewLayout:flowLayout];
+    [self.collectionView setPagingEnabled:YES];
+    [self.collectionView setCollectionViewLayout:flowLayout];
+    [flowLayout setItemSize:CGSizeMake(320, 548)];
+    
+    [self.collectionView registerClass:[PetCollectionViewCell class] forCellWithReuseIdentifier:CellIdentifier];
+
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate=self;
+    
+    [self.view addSubview:self.collectionView];
+    
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(320, 548);
 }
 
 // petFind()
@@ -113,7 +162,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
         }
         
         weakSelf.dataSource = [breedNames copy];
-        [weakSelf.tableView reloadData];
+        [weakSelf.collectionView reloadData];
         
     }];
     
@@ -178,7 +227,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
         NSLog(@"our petAttributes: %@", petAttributes);
         
         weakSelf.dataSource = [petAttributes copy];
-        [weakSelf.tableView reloadData];
+        [weakSelf.collectionView reloadData];
         
     }];
     
@@ -241,7 +290,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
         NSLog(@"our petAttributes: %@", petAttributes);
         
         weakSelf.dataSource = [petAttributes copy];
-        [weakSelf.tableView reloadData];
+        [weakSelf.collectionView reloadData];
         
     }];
     

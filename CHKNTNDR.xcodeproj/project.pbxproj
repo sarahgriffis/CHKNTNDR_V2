@@ -15,6 +15,8 @@
 		2695A3691AE5C42E00C492D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2695A3681AE5C42E00C492D6 /* Images.xcassets */; };
 		2695A36C1AE5C42E00C492D6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2695A36A1AE5C42E00C492D6 /* LaunchScreen.xib */; };
 		2695A3781AE5C42E00C492D6 /* CHKNTNDRTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2695A3771AE5C42E00C492D6 /* CHKNTNDRTests.m */; };
+		2695A3831AE7069A00C492D6 /* PetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2695A3821AE7069A00C492D6 /* PetCollectionViewCell.m */; };
+		2695A3861AE70A6400C492D6 /* CollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2695A3851AE70A6400C492D6 /* CollectionViewLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,10 @@
 		2695A3711AE5C42E00C492D6 /* CHKNTNDRTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CHKNTNDRTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2695A3761AE5C42E00C492D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2695A3771AE5C42E00C492D6 /* CHKNTNDRTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHKNTNDRTests.m; sourceTree = "<group>"; };
+		2695A3811AE7069A00C492D6 /* PetCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetCollectionViewCell.h; sourceTree = "<group>"; };
+		2695A3821AE7069A00C492D6 /* PetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetCollectionViewCell.m; sourceTree = "<group>"; };
+		2695A3841AE70A6400C492D6 /* CollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewLayout.h; sourceTree = "<group>"; };
+		2695A3851AE70A6400C492D6 /* CollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,10 @@
 				2695A35D1AE5C42E00C492D6 /* AppDelegate.m */,
 				2695A3621AE5C42E00C492D6 /* ViewController.h */,
 				2695A3631AE5C42E00C492D6 /* ViewController.m */,
+				2695A3841AE70A6400C492D6 /* CollectionViewLayout.h */,
+				2695A3851AE70A6400C492D6 /* CollectionViewLayout.m */,
+				2695A3811AE7069A00C492D6 /* PetCollectionViewCell.h */,
+				2695A3821AE7069A00C492D6 /* PetCollectionViewCell.m */,
 				2695A3651AE5C42E00C492D6 /* Main.storyboard */,
 				2695A3681AE5C42E00C492D6 /* Images.xcassets */,
 				2695A36A1AE5C42E00C492D6 /* LaunchScreen.xib */,
@@ -222,9 +232,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2695A3831AE7069A00C492D6 /* PetCollectionViewCell.m in Sources */,
 				2695A3611AE5C42E00C492D6 /* CHKNTNDR.xcdatamodeld in Sources */,
 				2695A35E1AE5C42E00C492D6 /* AppDelegate.m in Sources */,
 				2695A3641AE5C42E00C492D6 /* ViewController.m in Sources */,
+				2695A3861AE70A6400C492D6 /* CollectionViewLayout.m in Sources */,
 				2695A35B1AE5C42E00C492D6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +430,7 @@
 				2695A37D1AE5C42E00C492D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2695A37E1AE5C42E00C492D6 /* Build configuration list for PBXNativeTarget "CHKNTNDRTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +439,7 @@
 				2695A3801AE5C42E00C492D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

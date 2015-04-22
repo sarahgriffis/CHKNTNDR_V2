@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>41052FC9-166C-4C95-B6F8-7F6360588C81</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CHKNTNDR</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D193DE3BA7D3378BCA906B5C21D229235132759B</key>
+		<string>github.com:sgriffis89/CHKNTNDR_V2.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CHKNTNDR.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D193DE3BA7D3378BCA906B5C21D229235132759B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:sgriffis89/CHKNTNDR_V2.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D193DE3BA7D3378BCA906B5C21D229235132759B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D193DE3BA7D3378BCA906B5C21D229235132759B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CHKNTNDR</string>
+		</dict>
+	</array>
+</dict>
+</plist>
