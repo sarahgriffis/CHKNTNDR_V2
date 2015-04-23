@@ -8,23 +8,38 @@
 
 #import "PetCollectionViewCell.h"
 
+
 @implementation PetCollectionViewCell
-@synthesize imageView = _imageView;
+//@synthesize imageView = _imageView;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, 75.0)];
         self.label.textAlignment = NSTextAlignmentCenter;
         self.label.textColor = [UIColor blackColor];
         self.label.font = [UIFont boldSystemFontOfSize:35.0];
         self.label.backgroundColor = [UIColor whiteColor];
+        self.label.layer.cornerRadius = 8;
+        self.label.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.label];
         
-        [self.contentView addSubview:self.label];;
-        _imageView = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
-        [self.contentView addSubview:_imageView];
+        self.imageView = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
+        //self.imageView.layer.cornerRadius = 8;
+        //self.imageView.clipsToBounds = YES;
+        //self.imageView.layer.borderWidth=2.0;
+        //self.imageView.layer.borderColor=[[UIColor redColor] CGColor];
+        [self.contentView addSubview:self.imageView];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self layoutIfNeeded];
+    self.imageView.layer.cornerRadius = 8;
+    self.imageView.layer.masksToBounds = YES;
 }
 
 -(void)updateCell {

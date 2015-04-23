@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PetCollectionViewCell.h"
+@import AVFoundation;
 //#import "CollectionViewLayout.h"
 
 static NSString *CellIdentifier = @"CellIdentifier";
@@ -32,8 +33,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
 }
 
 #pragma mark - view
-- (void)viewDidLayoutSubviews
-{
+- (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     self.collectionView.frame = self.view.bounds;
 }
@@ -51,34 +51,27 @@ static NSString *CellIdentifier = @"CellIdentifier";
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PetCollectionViewCell *cell = (PetCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    //cell.textLabel.text = self.dataSource[indexPath.row][0];
-    cell.label.text = @"test text";
-    //self.dataSource[indexPath.row][0];
+    cell.label.text = self.dataSource[indexPath.row][0];
     
     NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: self.dataSource[indexPath.row][1]]];
-    //cell.imageView.image = [UIImage imageWithData:imageData];
+    UIImage *image = [UIImage imageWithData:imageData];
     
-    [cell.imageView setImage:[UIImage imageWithData:imageData]];
-    //UIImage *image = [UIImage imageWithContentsOfFile:filename];
-    //cell.imageView = setContentMode:UIViewContentModeScaleAspectFit];
+    [cell.imageView setImage:image];
+    [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
+    //[cell layoutIfNeeded];
+    
+    [cell.imageView setFrame:AVMakeRectWithAspectRatioInsideRect(image.size, cell.imageView.bounds)];
+    
+    cell.imageView.layer.cornerRadius = 8;
+    cell.imageView.clipsToBounds = YES;
+    //cell.imageView.layer.masksToBounds = YES;
+    //cell.imageView.layer.borderWidth=2.0;
+    //cell.imageView.layer.borderColor=[[UIColor redColor] CGColor];
     
     return cell;
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    cell.textLabel.text = self.dataSource[indexPath.row][0];
-    
-//    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: self.dataSource[indexPath.row][1]]];
-//    cell.imageView.image = [UIImage imageWithData:imageData];
-//    return cell;
-//}
-
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return self.dataSource.count;
-//}
 
 #pragma mark - helper
 - (void)setupCollectionView
@@ -86,20 +79,25 @@ static NSString *CellIdentifier = @"CellIdentifier";
    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    [flowLayout setMinimumInteritemSpacing:0.0f];
-    [flowLayout setMinimumLineSpacing:0.0f];
+    //What's this?  seems like line spacing is the spacing between cells?
+    //how do I center them?
+    [flowLayout setMinimumInteritemSpacing:50.0f];
+    [flowLayout setMinimumLineSpacing:50.0f];
+    //??What's this
+    [flowLayout setItemSize:CGSizeMake(30, 548)];
     
     
-    // self.collectionView = [UICollectionView new];
     self.collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds  collectionViewLayout:flowLayout];
     [self.collectionView setPagingEnabled:YES];
     [self.collectionView setCollectionViewLayout:flowLayout];
-    [flowLayout setItemSize:CGSizeMake(320, 548)];
+    
+    
     
     [self.collectionView registerClass:[PetCollectionViewCell class] forCellWithReuseIdentifier:CellIdentifier];
 
     self.collectionView.dataSource = self;
-    self.collectionView.delegate=self;
+    self.collectionView.delegate = self;
+    self.collectionView.backgroundColor = [UIColor colorWithRed:1.00 green:0.95 blue:0.80 alpha:1.0];
     
     [self.view addSubview:self.collectionView];
     
@@ -109,8 +107,19 @@ static NSString *CellIdentifier = @"CellIdentifier";
     return CGSizeMake(320, 548);
 }
 
-// petFind()
-// breedList()
+//how do I use this??
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    // Add inset to the collection view if there are not enough cells to fill the width.
+    CGFloat cellSpacing = ((UICollectionViewFlowLayout *) collectionViewLayout).minimumLineSpacing;
+    CGFloat cellWidth = ((UICollectionViewFlowLayout *) collectionViewLayout).itemSize.width;
+    NSInteger cellCount = [collectionView numberOfItemsInSection:section];
+    CGFloat inset = (collectionView.bounds.size.width - (cellCount * (cellWidth + cellSpacing))) * 0.5;
+    inset = MAX(inset, 0.0);
+    
+    return UIEdgeInsetsMake(0.0, 27.0, 0.0, 0.0);
+}
+
 
 #pragma mark - networking
 - (void)makeBreedListRequest
@@ -222,9 +231,11 @@ static NSString *CellIdentifier = @"CellIdentifier";
             NSMutableArray *innerArray = [NSMutableArray array];
             [innerArray addObject:dict[@"name"][@"$t"]];
             [innerArray addObject:dict[@"media"][@"photos"][@"photo"][3][@"$t"]];
+            NSString *description = dict[@"description"][@"$t"];
+            //[innerArray addObject:description];
             [petAttributes addObject:innerArray];
         }
-        NSLog(@"our petAttributes: %@", petAttributes);
+        //NSLog(@"our petAttributes: %@", petAttributes);
         
         weakSelf.dataSource = [petAttributes copy];
         [weakSelf.collectionView reloadData];
