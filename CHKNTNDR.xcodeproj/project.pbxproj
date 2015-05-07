@@ -17,6 +17,7 @@
 		2695A3781AE5C42E00C492D6 /* CHKNTNDRTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2695A3771AE5C42E00C492D6 /* CHKNTNDRTests.m */; };
 		2695A3831AE7069A00C492D6 /* PetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2695A3821AE7069A00C492D6 /* PetCollectionViewCell.m */; };
 		2695A3861AE70A6400C492D6 /* CollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2695A3851AE70A6400C492D6 /* CollectionViewLayout.m */; };
+		26F208C21AFBE931009AA019 /* Pet.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F208C11AFBE931009AA019 /* Pet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		2695A3821AE7069A00C492D6 /* PetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetCollectionViewCell.m; sourceTree = "<group>"; };
 		2695A3841AE70A6400C492D6 /* CollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewLayout.h; sourceTree = "<group>"; };
 		2695A3851AE70A6400C492D6 /* CollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewLayout.m; sourceTree = "<group>"; };
+		26F208C11AFBE931009AA019 /* Pet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pet.m; sourceTree = "<group>"; };
+		26F208C31AFBE940009AA019 /* Pet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pet.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				2695A35D1AE5C42E00C492D6 /* AppDelegate.m */,
 				2695A3621AE5C42E00C492D6 /* ViewController.h */,
 				2695A3631AE5C42E00C492D6 /* ViewController.m */,
+				26F208C11AFBE931009AA019 /* Pet.m */,
+				26F208C31AFBE940009AA019 /* Pet.h */,
 				2695A3841AE70A6400C492D6 /* CollectionViewLayout.h */,
 				2695A3851AE70A6400C492D6 /* CollectionViewLayout.m */,
 				2695A3811AE7069A00C492D6 /* PetCollectionViewCell.h */,
@@ -232,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F208C21AFBE931009AA019 /* Pet.m in Sources */,
 				2695A3831AE7069A00C492D6 /* PetCollectionViewCell.m in Sources */,
 				2695A3611AE5C42E00C492D6 /* CHKNTNDR.xcdatamodeld in Sources */,
 				2695A35E1AE5C42E00C492D6 /* AppDelegate.m in Sources */,

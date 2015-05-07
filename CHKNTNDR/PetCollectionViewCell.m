@@ -7,6 +7,7 @@
 //
 
 #import "PetCollectionViewCell.h"
+@import AVFoundation;
 
 
 @implementation PetCollectionViewCell
@@ -25,11 +26,12 @@
         [self.contentView addSubview:self.label];
         
         self.imageView = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
-        //self.imageView.layer.cornerRadius = 8;
-        //self.imageView.clipsToBounds = YES;
-        //self.imageView.layer.borderWidth=2.0;
-        //self.imageView.layer.borderColor=[[UIColor redColor] CGColor];
         [self.contentView addSubview:self.imageView];
+        
+        [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        
+
+        self.contentView.backgroundColor = [UIColor greenColor];
     }
     return self;
 }
@@ -37,9 +39,30 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self layoutIfNeeded];
+//    [self.imageView setFrame:AVMakeRectWithAspectRatioInsideRect(self.imageView.image.size, self.contentView.bounds)];
+    CGFloat ratio = [self ratioForImage:self.imageView.image];
+    self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width * ratio, self.imageView.image.size.height * ratio);
+    self.imageView.center = self.contentView.center;
     self.imageView.layer.cornerRadius = 8;
     self.imageView.layer.masksToBounds = YES;
+    
+    self.imageView.layer.borderWidth = 2.0;
+    self.imageView.layer.borderColor = [UIColor redColor].CGColor;
+    
+    [self.imageView setNeedsDisplay];
+//    [self.imageView set]
+
+}
+
+- (CGFloat)ratioForImage:(UIImage *)image
+{
+    CGFloat ratio = 1.0;
+    if (image.size.width > image.size.height) {
+        ratio = self.contentView.frame.size.width / image.size.width;
+    } else {
+        ratio = self.contentView.frame.size.height / image.size.height;
+    }
+    return ratio;
 }
 
 -(void)updateCell {
